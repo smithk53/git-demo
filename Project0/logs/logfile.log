@@ -1,0 +1,47 @@
+[ERROR] 2019-06-18 14:08:49.526 [main] ConnectionUtil - Unable to get connection to database
+[INFO ] 2019-06-18 14:20:01.827 [main] Customer - Customer skyle has logged in!
+[INFO ] 2019-06-18 14:20:22.411 [main] Customer - password entered: akjjsAA87
+[INFO ] 2019-06-18 14:22:06.293 [main] Customer - Customer skyle has logged in!
+[INFO ] 2019-06-18 14:22:13.311 [main] Customer - password entered: ddddddd
+[INFO ] 2019-06-18 14:24:25.876 [main] Customer - Customer skyle has logged in!
+[INFO ] 2019-06-18 14:24:29.767 [main] Customer - password entered: eeeeeeee
+[INFO ] 2019-06-18 14:28:08.231 [main] Customer - User has started the log in process
+[INFO ] 2019-06-18 14:28:12.500 [main] Customer - Customer skyle has logged in!
+[INFO ] 2019-06-18 14:28:20.931 [main] Customer - password entered: sssssssss
+[INFO ] 2019-06-18 14:28:28.458 [main] Customer - Method 'createCustomer' has been activated
+[INFO ] 2019-06-18 14:29:16.416 [main] Customer - Method 'createCustomer' has been activated
+[INFO ] 2019-06-18 14:29:31.326 [main] Customer - Method 'createCustomer' has been activated
+[INFO ] 2019-06-18 14:30:06.425 [main] Customer - User has started the log in process
+[INFO ] 2019-06-18 14:30:08.353 [main] Customer - Customer skyle has logged in!
+[INFO ] 2019-06-18 14:30:11.391 [main] Customer - password entered: sssssssss
+[INFO ] 2019-06-18 14:30:23.235 [main] Customer - Method 'createCustomer' has been activated
+[INFO ] 2019-06-18 14:31:54.447 [main] Customer - Method 'createCustomer' has been activated
+[INFO ] 2019-06-18 14:36:34.402 [main] Customer - User has started the log in process
+[INFO ] 2019-06-18 14:36:37.368 [main] Customer - Customer skyle has logged in!
+[INFO ] 2019-06-18 14:36:40.300 [main] Customer - password entered: ssssssss
+[INFO ] 2019-06-18 14:36:46.887 [main] Customer - Method 'createCustomer' has been activated
+[INFO ] 2019-06-18 14:38:14.327 [main] Customer - User has started the log in process
+[INFO ] 2019-06-18 14:38:16.530 [main] Customer - Customer skyle has logged in!
+[INFO ] 2019-06-18 14:38:18.511 [main] Customer - password entered: wwwwwwwwwwwwwww
+[INFO ] 2019-06-18 14:38:49.271 [main] Customer - User has started the log in process
+[INFO ] 2019-06-18 14:38:52.028 [main] Customer - Customer skyle has logged in!
+[INFO ] 2019-06-18 14:38:57.774 [main] Customer - password entered: wpoesfdA23
+[INFO ] 2019-06-18 14:39:05.906 [main] Customer - Method 'createCustomer' has been activated
+[INFO ] 2019-06-18 14:42:36.758 [main] Customer - User has started the log in process
+[INFO ] 2019-06-18 14:42:38.638 [main] Customer - Customer skyle has logged in!
+[INFO ] 2019-06-18 14:42:41.710 [main] Customer - password entered: ssssssss
+[INFO ] 2019-06-18 14:42:48.737 [main] Customer - Method 'createCustomer' has been activated
+[INFO ] 2019-06-18 15:20:38.965 [main] Customer - User has started the log in process
+[INFO ] 2019-06-18 15:20:41.106 [main] Customer - Customer skyle has logged in!
+[INFO ] 2019-06-18 15:20:45.073 [main] Customer - password entered: 3333333333
+[INFO ] 2019-06-18 15:20:53.077 [main] Customer - Method 'createCustomer' has been activated
+[INFO ] 2019-06-18 15:25:53.523 [main] Customer - User has started the log in process
+[INFO ] 2019-06-18 15:25:55.450 [main] Customer - Customer skyle has logged in!
+[INFO ] 2019-06-18 15:26:03.906 [main] Customer - password entered: wwwwwwwwwwwwwww
+[INFO ] 2019-06-18 15:26:12.067 [main] Customer - Method 'createCustomer' has been activated
+[INFO ] 2019-06-18 15:26:19.138 [main] Customer - Artists' info is being collected from the database and displayed
+[INFO ] 2019-06-18 15:27:39.338 [main] Customer - User has started the log in process
+[INFO ] 2019-06-18 15:27:41.195 [main] Customer - Customer skyle has logged in!
+[INFO ] 2019-06-18 15:27:44.201 [main] Customer - password entered: eeeeeee
+[INFO ] 2019-06-18 15:27:51.837 [main] Customer - Method 'createCustomer' has been activated
+[INFO ] 2019-06-18 15:28:00.242 [main] Customer - Artists' info is being collected from the database and displayed
