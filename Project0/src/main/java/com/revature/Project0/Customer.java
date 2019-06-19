@@ -1,5 +1,6 @@
 package com.revature.Project0;
 import java.util.*;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -10,13 +11,12 @@ public class Customer extends Banker{
 	private static final Logger classlog = LogManager.getLogger(Customer.class.getName());
 	private static String loginid = "";
 	private static String password = "";
-	static boolean yesorno;
 	//will store the amount of money the user wishes to withdraw from their account later on
 	private static int withdrawamount = 0;
 	private static int depoamount = 0;
-	private static String transType;
+	private static String transType = "";
 	//will be used to keep track of different transactions
-	private static int transactionnum;
+	private static int transactionnum = 0;
 	private String response1; //will later store the user's response to question #1
 	private String response2; //will later store the user's response to question #2
 	//create new instances of objects
@@ -25,15 +25,23 @@ public class Customer extends Banker{
 	static AccountSummary accsum = new AccountSummary();
 	static Random rand = new Random();
 	static Scanner scan = new Scanner(System.in);
-	static String[] customers = new String[10];
+	static Connection con = null;
+	static ResultSet rs;
+	static boolean customercreated;
+	//static String[] customers = new String[10];
 	//will be used later to help in the randomization of the transaction# and adding customers to the above array
 	static int i = 0;
 	public int getTransactionNum() {
 		return transactionnum;
 	}
 	public static String getCustomerLoginID() {
-		customers[i] = loginid;
-		return customers[i];
+		return loginid;
+	}
+	public static void setCustomerLoginID() {
+		//user's id must be 5 characters. If it isn't, prompt the customer for an id again 
+		System.out.print("Please enter a username: ");
+		//store the user's input in a string object
+		loginid = scan.nextLine();
 	}
 	public static String getCustomerPassword() {
 		return password;
@@ -48,33 +56,41 @@ public class Customer extends Banker{
 		return depoamount;
 	}
 	public static void createCustomer() throws SQLException{
-		classlog.info("Method 'createCustomer' has been activated");
-		/*String sqlquery = "INSERT INTO CUSTOMER"
-							+ "VALUES('"+getCustomerLoginID()+"','"+getCustomerPassword()+"','"+getDepoAmount()+"','"
-							+getWithdrawAmount()+"','"+accsum.getAccountStatus()+"','"+accsum.getAccountBalance()+"'"; 
-		*/
-		String sqlquery = "SELECT * FROM ARTIST";
-		//Connection connect = ConnectToDatabase.acquireConnection();
-		//Connection con = ConnectionUtil.getConnection();
-		Connection con = ConnectionUtil.getConnection();
+		classlog.info("Customer is being created.");
+		String sqlquery = "INSERT INTO CUSTOMER"
+							+ "\nVALUES('"+getCustomerLoginID()+"','"+getCustomerPassword()+"',"+getDepoAmount()+","
+							+getWithdrawAmount()+",'"+accsum.getAccountStatus()+"',"+accsum.getAccountBalance()+")"; 
+		
+		con = ConnectionUtil.getConnection();
 		System.out.println("Connection: "+con);
 		PreparedStatement stmt = con.prepareStatement(sqlquery);
-		ResultSet rs = stmt.executeQuery();
-		classlog.info("Artists' info is being collected from the database and displayed");
-		System.out.println("ARTISTID\t"+"NAME");
+		rs = stmt.executeQuery();
+		classlog.info("Customer is being added to the database");
+		customercreated = true;
+	}
+	public static void displayInfo() throws SQLException {
+		classlog.info("Customer is being displayed.. through method 'displayInfo'");
+		String transquery = "SELECT * FROM CUSTOMER";
+		PreparedStatement stmt2 = con.prepareStatement(transquery);
+		rs = stmt2.executeQuery();
+		System.out.println("CUSTOMERID\t"+"PASSWORD\t"+"DEPOSIT\t"+"WITHDRAW\t"+"ACCOUNTSTATUS\t"+"ACCBALANCE");
 		while(rs.next()) {
-			int artistid = rs.getInt("ARTISTID");
-			String artistname = rs.getString("NAME");
-			System.out.println(artistid +"\t\t"+artistname);
+			String cusid = rs.getString("CUSTOMERID");
+			String cuspass = rs.getString("PASSWORD");
+			int cusdepo = rs.getInt("DEPOSIT");
+			int cuswithd = rs.getInt("WITHDRAW");
+			String accstat = rs.getString("ACCOUNTSTATUS");
+			int accbal = rs.getInt("ACCBALANCE");
+			System.out.println(cusid+"\t\t"+cuspass+"\t\t"+cusdepo+"\t"+cuswithd+"\t\t"+accstat+"\t"+accbal);
 		}
-		//PreparedStatement pstmt1 = con.prepareStatement(sqlquery);
-		/*pstmt1.setString(1,getCustomerLoginID());
-		pstmt1.setString(2,getCustomerPassword());
-		pstmt1.setInt(3,getDepoAmount());
-		pstmt1.setInt(4,getWithdrawAmount());
-		pstmt1.setString(5,accsum.getAccountStatus());
-		pstmt1.setInt(6,accsum.getAccountBalance());
-		pstmt1.executeUpdate();*/
+	}
+	public static void changeAccStatus() throws SQLException{
+		classlog.info("Customer's account status is being changed!");
+		String statuschangequery = "UPDATE CUSTOMER"
+									+ "\nSET ACCOUNTSTATUS = '"+accsum.getAccountStatus()+"'"
+									+"\nWHERE CUSTOMERID = '"+getCustomerLoginID()+"'";
+		PreparedStatement stmt3 = con.prepareStatement(statuschangequery);
+		rs = stmt3.executeQuery();
 	}
 	//method to prompt the user for login credentials and process them locally
 	public void login() 
@@ -82,27 +98,28 @@ public class Customer extends Banker{
 		//loop till the customer enters a valid username
 		while(true) {
 			classlog.info("User has started the log in process");
-			//prompt customer for a id
-			//user's id must be 5 characters. If it isn't, prompt the customer for an id again 
-			System.out.print("Please enter a username: ");
-			//store the user's input in a string object
-			loginid = scan.nextLine();
-			if(loginid.length() >= 5) {
+			//call method that prompts customer for a id
+			setCustomerLoginID();
+			if(loginid.length() >= 4 && loginid.length() <= 7) {
 				classlog.info("Customer "+ loginid+" has logged in!");
 				break;
 			}
-			System.out.println("Sorry, you must enter at least 5 characters");
+			else {
+				System.out.println("ID must be between 4 and 7 characters");
+			}
 		}
 		while(true) {
 			//if the user's indicated password is not at least 7 characters long, prompt the user again
 			System.out.print("Now enter a password: ");
 			//pick up user's input from standard input stream and store it in a string object
 			password = scan.nextLine();
-			if(password.length() >= 7) {
+			if(password.length() >= 4 && password.length() <= 7) {
 				classlog.info("password entered: "+ password);
 				break;
 			}
-			System.out.println("Passwords must be at least 7 characters long");	
+			else {
+				System.out.println("Passwords must be between 4 and 7 characters");	
+			}
 		}
 		
 		//--Main fragment that has the core banking functionality--
@@ -115,8 +132,17 @@ public class Customer extends Banker{
 			if(response1.equals("y")) {
 				System.out.println("Ok. Say less..");
 				accsum.setAccountStatus("inactive");
+				//reset the account balance for new user
+				accsum.accountbal = 3000;
+				try {
+					changeAccStatus();
+					displayInfo();
+				}
+				catch(SQLException sqe) {
+					sqe.printStackTrace();
+				}
 				//once you create it, call the function that displays the new account status here
-				System.exit(0);
+				break;
 				//change the status of the account in the database -here-
 			}
 			//user has indicated that they want to continue operating on their bank account
@@ -177,6 +203,7 @@ public class Customer extends Banker{
 				}
 				try {
 					createCustomer();
+					displayInfo();
 				}
 				catch(SQLException sqe) {
 					sqe.printStackTrace();
